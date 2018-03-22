@@ -5,7 +5,6 @@ import {
     Text,
     TextInput,
     View,
-    PropTypes,
     StyleSheet,
     ToastAndroid,
     Button,
@@ -13,6 +12,7 @@ import {
     Picker,
     TouchableHighlight,
 } from 'react-native'
+import PropTypes from 'prop-types';
 
 const checkNum = (num) => {
     if (num) {
@@ -56,11 +56,11 @@ const checkNum = (num) => {
 }
 
 export default class Login extends Component {
-    // static propTypes = {
-    //     sendChkCode: React.PropTypes.string,
-    //     phoneNumPlh: React.PropTypes.string,
-    //     ispassword: React.PropTypes.bool
-    // }
+    static propTypes = {
+        // sendChkCode: PropTypes.string,
+        // phoneNumPlh: PropTypes.string,
+        ispassword: PropTypes.bool
+    }
 
     static defaultProps = {
         role: '选择用户角色',
@@ -69,7 +69,6 @@ export default class Login extends Component {
         super(props)
         this.state = {
             phoneNum: "",
-            chkCode: "",
             password: "",
             role: "",
 
@@ -87,6 +86,14 @@ export default class Login extends Component {
                 ispassword: true,
             })
         }
+    }
+
+    onLoginBtnPress = () => {
+        Alert.alert('登陆按钮被按下！');
+    }
+
+    onRegBtnPress = () => {
+        Alert.alert('注册按钮被按下！');
     }
 
     render() {
@@ -156,7 +163,7 @@ export default class Login extends Component {
                     </Text> */}
                     <Text
                         style={styles.cfmBtn}
-                        onPress={this.onCfmButtonPress}
+                        onPress={this.onLoginBtnPress}
                     >
                         登陆
                     </Text>
@@ -175,7 +182,7 @@ export default class Login extends Component {
                     </Text> */}
                     <Text
                         style={styles.backTxt}
-                        onPress={this.onBackBtnPress}
+                        onPress={this.onRegBtnPress}
                     >
                         注册一个
                     </Text>

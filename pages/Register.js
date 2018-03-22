@@ -6,7 +6,6 @@ import {
     Text,
     TextInput,
     View,
-    PropTypes,
     StyleSheet,
     ToastAndroid,
     Button,
@@ -15,6 +14,7 @@ import {
     TouchableHighlight,
 } from 'react-native'
 
+import PropTypes from 'prop-types';
 
 const checkNum = (num) => {
     if(num) {
@@ -31,11 +31,11 @@ const checkNum = (num) => {
 }
 
 class Register extends Component {
-    // static propTypes = {
-        //     sendChkCode: React.PropTypes.string,
-        //     phoneNumPlh: React.PropTypes.string,
-        //     ispassword: React.PropTypes.bool
-        // }
+    static propTypes = {
+            // sendChkCode: PropTypes.string,
+            // phoneNumPlh: PropTypes.string,
+            ispassword: PropTypes.bool
+        }
 
     static defaultProps = {
         role: '选择用户角色',
@@ -46,6 +46,7 @@ class Register extends Component {
             phoneNum: "",
             chkCode: "",
             password: "",
+            // role_ships role_goods
             role: "",
             sendChk: "发送验证码",
 
@@ -188,8 +189,8 @@ class Register extends Component {
                         <TouchableHighlight style={styles.eyeImgWrap} onPress={this.onEyeBtnPress}>
                             {
                                 this.state.ispassword? 
-                                    <Image  style={styles.eyeImg} source={require('../img/eye-close.png')} ></Image>
-                                    : <Image  style={styles.eyeImg} source={require('../img/eye-open.png')} ></Image>
+                                    <Image style={styles.eyeImg} source={require('../img/eye-close.png')} ></Image>
+                                    : <Image style={styles.eyeImg} source={require('../img/eye-open.png')} ></Image>
                             }
                         </TouchableHighlight >
                     </View>
@@ -215,8 +216,15 @@ class Register extends Component {
                         <Picker
                             mode= {"dropdown"}
                             selectedValue={this.state.role}
-                            onValueChange={(myRole) => this.setState({ role: myRole })}>
-                            <Picker.Item label="我是船主" value="role_ship" />
+                            onValueChange={(myRole) => 
+                            {
+                                
+                                this.setState({ role: myRole })
+                                //Alert.alert(this.state.role);
+                            }
+                                
+                                }>
+                            <Picker.Item label="我是船主" value="role_ships" />
                             <Picker.Item label="我是货主" value="role_goods" />
                         </Picker>
 
