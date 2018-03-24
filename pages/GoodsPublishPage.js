@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import {
+    Platform,
     Image,
     Text,
     TextInput,
@@ -23,6 +24,33 @@ export default class GoodsPublishPage extends Component {
         // ispassword: PropTypes.bool
     }
 
+    static navigationOptions = ({ navigation }) => ({
+        tabBarLabel: '发布',
+        tabBarIcon: ({ focused, tintColor }) => {
+            const { routeName } = navigation.state;
+            let iconPath;
+            if (routeName === 'GoodsPublishPage') {
+                //FIXME: 改成加号
+                iconPath = require("../img/tabPublish.png");
+            }
+
+            return <Image source={iconPath} style={{
+                position: 'absolute',
+                overflow: 'visible', 
+                bottom: Platform.OS === 'ios' ? 5 : -3,
+                //marginTop: Platform.OS === 'ios' ? 10 : -50,
+                //marginBottom: Platform.OS === 'ios'? 10:50,
+                width: Platform.OS === 'ios' ? 60 : 40, 
+                height: Platform.OS === 'ios' ? 60 : 40,  }}></Image>;
+        },
+        
+    })
+
+    static tabBarOptions = ({ navigation }) => ({
+        activeTintColor: '#000',
+        inactiveTintColor: '#6A6A6A',
+    })
+
     static defaultProps = {
         //role: '',
     }
@@ -42,7 +70,7 @@ export default class GoodsPublishPage extends Component {
         var { style } = this.props
         return (
             <View style={styles.container}>
-                <Text>Template Page.</Text>
+                <Text style={{ fontSize: 20 }}>发布页</Text>
             </View >
         )
     }
@@ -73,6 +101,7 @@ const styles = StyleSheet.create({
 
     },
     container: {
+        flex:1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',

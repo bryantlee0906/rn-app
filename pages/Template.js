@@ -42,7 +42,7 @@ export default class Template extends Component {
         var { style } = this.props
         return (
             <View style={styles.container}>
-                <Text>Template Page.</Text>
+                <Text>调试用模版页面，记得修改</Text>
             </View >
         )
     }
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
 
     },
     container: {
+        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',

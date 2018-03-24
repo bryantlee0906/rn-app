@@ -42,16 +42,19 @@ export default class InfoCard extends Component {
         }
     }
 
-    onXxxBtnPress = () => {
-        Alert.alert('xx按钮被按下！');
+    onGoodsCardPress = () => {
+        this.props.Navg.navigate('GoodsDetailsPage')
     }
 
     render() {
         var { style } = this.props
         return (
-            <View style={styles.container}>
-                
-            </View >
+            <TouchableHighlight 
+                style={styles.container}
+                onPress={this.onGoodsCardPress}
+                >
+                <Text>Card page</Text>
+            </TouchableHighlight >
         )
     }
 }
@@ -82,7 +85,12 @@ const styles = StyleSheet.create({
     },
     
     container: {
-        backgroundColor: '#fff',
+        marginBottom: 10,
+        flex: 1,
+        height: 120,
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: '#D3D3D3',
     },
 })
 

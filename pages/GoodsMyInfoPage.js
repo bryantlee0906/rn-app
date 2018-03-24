@@ -42,7 +42,7 @@ export default class GoodsMyInfoPage extends Component {
         var { style } = this.props
         return (
             <View style={styles.container}>
-                <Text>Template Page.</Text>
+                <Text style={{ fontSize: 20 }}>我的信息页</Text>
             </View >
         )
     }
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
 
     },
     container: {
+        flex:1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',

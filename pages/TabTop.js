@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    Platform,
     AppRegistry,
     StyleSheet,
     Text,
@@ -11,7 +12,7 @@ from
 'react-native';
 import PropTypes from 'prop-types';
 
-export default class TabBottom extends Component {
+export default class TabTop extends Component {
 
     static propType = {
         goToPage    : PropTypes.func,
@@ -36,7 +37,7 @@ export default class TabBottom extends Component {
             <View style={styles.tabs}>
                 {this.props.tabs.map((tab, i) => {
                     let color = this.props.activeTab === i ? '#2D9BFD' : '#6A6A6A';
-                    let _tabName = this.props.activeTab === i ? <Text style={styles._under}></Text> : <Text style={styles._noUnder}></Text>;
+                    let _tabName = this.props.activeTab === i ? <View style={styles._under}></View> : <View style={styles._noUnder}></View>;
                     //let icon = this.props.activeTab == i ? this.props.selectedTabIconNames[i] : this.props.tabIconNames[i];
                     return (
                         <TouchableOpacity
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
         //borderTopColor: '#d9d9d9',
         //borderTopWidth:2
         //flex: 1,
-        marginTop:20,
+        marginTop: Platform.OS === 'ios' ?  -20 : 20,
         //backgroundColor: '#0ff',
     },
     tab: {

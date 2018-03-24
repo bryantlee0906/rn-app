@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "emu": "emulator -avd a5.1",
+    "run": "react-native run-android"
   },
   "dependencies": {
     "antd-mobile": "^2.1.8",

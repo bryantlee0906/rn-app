@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 
 import {
+    Platform,
     Image,
     Text,
     TextInput,
@@ -54,12 +55,22 @@ class Register extends Component {
         }
     }
 
+    static navigationOptions = ({ navigation }) => {
+        return {
+            // headerTitle: <Text>标题</Text>,
+            headerLeft: null,
+            
+        }
+    }
+
     onCfmButtonPress = () => {
-        Alert.alert('确定按钮被按下！');
+        this.props.navigation.navigate('Login')
+        //Alert.alert('确定按钮被按下！');
     }
     
     onBackBtnPress = () => {
-        Alert.alert('返回登陆按钮被按下！');
+        this.props.navigation.navigate('Register')
+        //Alert.alert('返回登陆按钮被按下！');
     }
     
     onSendChkCodeBtnPress = () => {
@@ -296,7 +307,13 @@ const styles = StyleSheet.create({
         height: 100,
     },
     wrapper: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        //backgroundColor: '#ff0',
+        //justifyContent: 'flex-end',
+        //justifyContent: 'space-between',
+        //justifyContent: 'space-around',
+        //alignSelf: 'center',
+        //alignItems: 'flex-end',
     },
     txtBorder: {
         height: 40,
@@ -305,26 +322,41 @@ const styles = StyleSheet.create({
         borderColor: '#999',
         marginLeft: 50,
         marginRight: 50,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        //backgroundColor: '#0ff',
+
+        justifyContent: 'space-between',
+    },
+    textInput: {
+        height: 50,
+        //width: 200
+        flex: 1,
+        //backgroundColor: '#0ff',
     },
     sendChk: {
+        //backgroundColor: '#ff0',
+        //flex: 1,
         height: 20,
         width: 75,
-        marginLeft: -20,
-        marginRight: 0,
+        //justifyContent: 'space-between',
+        
+        //marginLeft: Platform.OS === 'ios' ? 20: -20,
+
+        //marginRight: 0,
         fontSize: 15,
         marginTop: 15,
         color: '#999',
         
-
     },
     eyeImgWrap: {
-        marginLeft: 28,
-        marginRight: 0,
+        //marginLeft: Platform.OS === 'ios' ? 65 : 25,
+        //backgroundColor: '#ff0',
+        //marginRight: 0,
         marginTop: 8,
         height: 30,
         width: 32,
         //borderWidth: 1,
+        //backgroundColor: '#f00',
     },
     eyeImg: {
         opacity: .6,
@@ -335,10 +367,7 @@ const styles = StyleSheet.create({
         //marginTop: 8,
         //borderWidth: 1,
     },
-    textInput: {
-        height: 50,
-        width: 200
-    },
+    
     cfmButton: {
         //width: 
         marginTop: 80,
@@ -374,14 +403,16 @@ const styles = StyleSheet.create({
     rolePicker: {
         marginLeft: 50,
         marginRight: 50,
+        
+        marginBottom: Platform.OS === 'ios'? 120: 0,
 
         height: 40,
         flex: 1,
-        borderBottomWidth: 1,
+        //borderBottomWidth: 1,
         borderColor: '#999',
         //backgroundColor: '#999',
         //color: '#999',
-        opacity: .6,
+        //opacity: .6,
 
         //fontSize: 5,
     }

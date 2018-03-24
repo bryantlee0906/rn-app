@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import {
+    Platform,
     Image,
     Text,
     TextInput,
@@ -14,6 +15,8 @@ import {
     ScrollView,
 
 } from 'react-native';
+
+//适配Platform.OS === 'ios'
 
 import PropTypes from 'prop-types';
 
@@ -30,19 +33,20 @@ import GoodsPublishPage from './GoodsPublishPage'
 import GoodsMessagePage from './GoodsMessagePage'
 import GoodsMyInfoPage from './GoodsMyInfoPage'
 
+import InfoCard from './InfoCard'
 
-import TabBottom from './TabBottom';
+//顶部tab样式分离。
+import TabTop from './TabTop';
 
-
+//顶部右边的图标，这段代码不可复用，但是可以复制修改使用。
 class RightHeader extends Component {
     onSortBtnPress = () => {
         Alert.alert("排序");
     }
     onScreenBtnPress = () => {
-        //Alert.alert("筛选");
-        //Alert.alert(this.props.Navg.navigate('GoodsDetailsPage'));
-        this.props.Navg.navigate('GoodsDetailsPage')
-        //GoodsPage.jumpToGoodsDetailsPage();
+        Alert.alert("筛选");
+        // 
+        //this.props.Navg.navigate('GoodsDetailsPage')
     }
     render() {
         return (
@@ -110,12 +114,6 @@ class GoodsPage extends Component {
         }
     }
 
-    static jumpToGoodsDetailsPage = () => {
-
-        Alert.alert(this.props.navigation);
-        //this.props.navigation.navigate('GoodsDetailsPage')
-    }
-
     onXxxBtnPress = () => {
         Alert.alert('xx按钮被按下！');
     }
@@ -158,7 +156,7 @@ class GoodsPage extends Component {
 
                 <ScrollableTabView 
                     renderTabBar={() =>
-                        <TabBottom
+                        <TabTop
                             tabNames={tabTitles}
                             //FIXME:tabIconNames={tabIcon}
                             //FIXME:selectedTabIconNames={tabSelectedIcon}
@@ -170,21 +168,28 @@ class GoodsPage extends Component {
                 >
                     <View tabLabel="1">
                         <ScrollView>
-                            <Text>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis ratione ad magnam maiores repellat! Dicta facilis obcaecati at! Expedita reiciendis cumque quidem tempore. Quibusdam quam dolores at. Ipsa, blanditiis odit.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi maxime esse nemo? Quas sunt amet obcaecati ex quo et, in, corporis quia accusamus vel beatae officia nulla quasi eligendi veniam?
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non perferendis, aperiam aut ut fuga laboriosam recusandae enim minus itaque veniam sequi illo adipisci placeat facere quod perspiciatis a quaerat? Sapiente?
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis quisquam quae dolorum illo beatae ullam delectus sint soluta vero pariatur aliquid corrupti quas molestiae hic temporibus consectetur, quos error esse?
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis nam aliquid quaerat quidem! Dicta modi, reiciendis libero porro sed laboriosam amet repellendus magni unde corporis, enim facilis, tempore odio commodi!
-                            </Text>
+                            <InfoCard Navg={this.props.navigation}/>
+
+                            <InfoCard Navg={this.props.navigation} />
+
+                            <InfoCard Navg={this.props.navigation} />
+
+                            <InfoCard Navg={this.props.navigation} />
+
+                            <InfoCard Navg={this.props.navigation} />
                         </ScrollView>
                     </View>
                     <View tabLabel="2">
                         <ScrollView>
-                            <Text>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis ratione ad magnam maiores repellat! Dicta facilis obcaecati at! Expedita reiciendis cumque quidem tempore. Quibusdam quam dolores at. Ipsa, blanditiis odit.
+                            <InfoCard Navg={this.props.navigation} />
 
-                            </Text>
+                            <InfoCard Navg={this.props.navigation} />
+
+                            <InfoCard Navg={this.props.navigation} />
+
+                            <InfoCard Navg={this.props.navigation} />
+
+                            <InfoCard Navg={this.props.navigation} />
                         </ScrollView>
                     </View>
                 </ScrollableTabView>
@@ -195,35 +200,79 @@ class GoodsPage extends Component {
     }
 }
 
-const GoodsStack = StackNavigator({
-    GoodsPage: {
-        screen: GoodsPage,
-    },
-    GoodsDetailsPage: {
-        screen: GoodsDetailsPage,
-    },
-});
 
-export default TabNavigator({
+const GoodsTabnav = TabNavigator({
     //物流圈
     GoodsPage: { 
-        screen: GoodsStack 
+        screen: GoodsPage,
+        navigationOptions: {
+            tabBarLabel: '物流圈',
+        }
     },
     //订单
     GoodsBillPage: {
-        screen: GoodsBillPage
+        screen: GoodsBillPage,
+        navigationOptions: {
+            tabBarLabel: '订单',
+        }
     },
+
     //发布
     GoodsPublishPage: {
-        screen: GoodsPublishPage
+        screen: GoodsPublishPage,
+        // navigationOptions: ({ navigation }) => ({
+        //     tabBarLabel: '发布',
+        //     tabBarIcon: ({ focused, tintColor }) => {
+        //         const { routeName } = navigation.state;
+        //         let iconPath;
+        //         if (routeName === 'GoodsPublishPage') {
+        //             //FIXME: 改成加号
+        //             iconPath = require("../img/tabPublish.png");
+        //         }
+        //         // You can return any component that you like here! We usually use an
+        //         // icon component from react-native-vector-icons
+        //         return <Image source={iconPath} style={{ position: 'absolute', width: 60, height: 60,    }}></Image>;
+        //     },
+        //     
+        // }),
+
+        // tabBarOptions: {
+        //     //FIXME: 修改不了颜色，样式
+        //     //activeTintColor: '#000',
+        //     inactiveTintColor: '#000',
+        //     style: {
+        //         //backgroundColor: '#0ff', 
+        //         height: 40,   
+        //         overflow: 'visible',
+        //     },
+        //     tabStyle: {
+        //         //backgroundColor: '#ff0', 
+        //         overflow: 'visible',
+        //     },
+        //     indicatorStyle: {
+        //         //backgroundColor: '#ff0',
+        //         overflow: 'visible',
+        //     },
+        //     labelStyle: {
+        //         marginTop: -5,
+        //         fontSize: 10, // 文字大小  
+        //     },
+        // },
+        
     },
     //消息
     GoodsMessagePage: {
-        screen: GoodsMessagePage
+        screen: GoodsMessagePage,
+        navigationOptions: {
+            tabBarLabel: '消息',
+        }
     },
     //我的
     GoodsMyInfoPage: {
-        screen: GoodsMyInfoPage
+        screen: GoodsMyInfoPage,
+        navigationOptions: {
+            tabBarLabel: '我的',
+        }
     },
     
 }, 
@@ -233,17 +282,18 @@ export default TabNavigator({
                 const { routeName } = navigation.state;
                 let iconPath;
                 if (routeName === 'GoodsPage') {
-                    iconPath = require("../img/tabTemp.png");
+                    iconPath = focused ? require("../img/tabGoods.png") : require("../img/tabGoods-outline.png");
                 } else if (routeName === 'GoodsBillPage') {
-                    iconPath = require("../img/tabTemp.png");
+                    iconPath = focused ? require("../img/tabOrders.png") : require("../img/tabOrders-outline.png");
                 } else if (routeName === 'GoodsPublishPage') {
-                    iconPath = require("../img/tabTemp.png");
+                    //FIXME: 改成加号
+                    iconPath = focused ? require("../img/tabTemp.png") : require("../img/tabTemp.png");
                 }
                 else if (routeName === 'GoodsMessagePage') {
-                    iconPath = require("../img/tabTemp.png");
+                    iconPath = focused ? require("../img/tabMessage.png") : require("../img/tabMessage-outline.png");
                 }
                 else if (routeName === 'GoodsMyInfoPage') {
-                    iconPath = require("../img/tabTemp.png");
+                    iconPath = focused ? require("../img/tabMyInfo.png") : require("../img/tabMyInfo-outline.png");
                 }
 
 
@@ -253,19 +303,73 @@ export default TabNavigator({
                 /> */}
                 // You can return any component that you like here! We usually use an
                 // icon component from react-native-vector-icons
-                return <Image source={iconPath} style={{width: 20, height:20}}></Image>;
+                return <Image source={iconPath} style={{width: 25, height:25}}></Image>;
             },
         }),
         tabBarComponent: TabBarBottom,
         tabBarPosition: 'bottom',
+        lazy: true,
         tabBarOptions: {
-            activeTintColor: 'tomato',
-            inactiveTintColor: 'gray',
+            activeTintColor: '#2D9BFD',
+            inactiveTintColor: '#6A6A6A',
+            labelStyle: {
+                marginTop: 0,
+                fontSize: 10, // 文字大小  
+                fontWeight: '700',
+            }, 
+            //tabStyle的父容器 
+            style: { 
+                //backgroundColor: '#0ff', 
+                height: 50, 
+
+                //position: 'absolute',
+                //overflow: 'visible',
+            },  
+            //这个是tab Image的父容器
+            tabStyle: {
+                //marginTop: 30,
+                height: 50,   
+                //backgroundColor: '#ff0', 
+
+                //position: 'relative',
+                //overflow: 'visible',
+            },
+
+            //TabBar下面显示一条线//安卓
+            indicatorStyle : {
+                height: 0,
+            },
+
         },
         animationEnabled: false,
         swipeEnabled: false,
     }
 )
+
+
+const GoodsStack = StackNavigator({
+    GoodsTabnav: {
+        screen: GoodsTabnav,
+    },
+    GoodsDetailsPage: {
+        screen: GoodsDetailsPage,
+    },
+
+}, {
+        initialRouteName: 'GoodsTabnav',
+
+        navigationOptions: ({ navigation }) => (
+            Platform.OS === 'ios'?
+            {
+                headerStyle: {
+                    marginTop: -20,
+                },
+            }:
+            {}
+        )
+        
+    });
+
 
 const styles = StyleSheet.create({
     test: {
@@ -332,3 +436,4 @@ const styles = StyleSheet.create({
     }
 })
 
+export default GoodsStack;

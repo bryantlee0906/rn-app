@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import {
+    Platform,
     Image,
     Text,
     TextInput,
@@ -76,6 +77,14 @@ export default class Login extends Component {
         }
     }
 
+    static navigationOptions = ({ navigation }) => {
+        return {
+            // headerTitle: <Text>标题</Text>,
+            headerLeft: null,
+
+        }
+    }
+
     onEyeBtnPress = () => {
         if (this.state.ispassword) {
             this.setState({
@@ -89,11 +98,13 @@ export default class Login extends Component {
     }
 
     onLoginBtnPress = () => {
-        Alert.alert('登陆按钮被按下！');
+        this.props.navigation.navigate('GoodsPage')
+        //Alert.alert('登陆按钮被按下！');
     }
 
     onRegBtnPress = () => {
-        Alert.alert('注册按钮被按下！');
+        this.props.navigation.navigate('Register')
+        //Alert.alert('注册按钮被按下！');
     }
 
     render() {
@@ -133,7 +144,7 @@ export default class Login extends Component {
                             underlineColorAndroid={'transparent'}
                             style={styles.textInput}
                             multiline={false}
-                            placeholder={'请设置密码'}
+                            placeholder={'请输入密码'}
                             secureTextEntry={this.state.ispassword}
                             onChangeText={(text) => {
                                 this.setState({
@@ -238,6 +249,12 @@ const styles = StyleSheet.create({
     wrapper: {
         flexDirection: 'row'
     },
+    textInput: {
+        height: 50,
+        //width: 200
+        flex: 1,
+        //backgroundColor: '#0ff',
+    },
     txtBorder: {
         height: 40,
         flex: 1,
@@ -245,10 +262,13 @@ const styles = StyleSheet.create({
         borderColor: '#999',
         marginLeft: 50,
         marginRight: 50,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        //backgroundColor: '#0ff',
+
+        justifyContent: 'space-between',
     },
     eyeImgWrap: {
-        marginLeft: 28,
+        marginLeft: Platform.OS === 'ios' ? 68 : 28,
         marginRight: 0,
         marginTop: 8,
         height: 30,
@@ -264,14 +284,10 @@ const styles = StyleSheet.create({
         //marginTop: 8,
         //borderWidth: 1,
     },
-    textInput: {
-        height: 50,
-        width: 200
-    },
-
+    
     cfmButton: {
         //width: 
-        marginTop: 160,
+        marginTop: Platform.OS === 'ios' ? 260 : 160,
         marginBottom: 0,
         width: 100,
         height: 40,
